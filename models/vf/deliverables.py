@@ -705,7 +705,7 @@ class Vf_Deliverables:
         args_vf_capex_overview["grow system depreciation"] = result["vf_grow"]["depreciation"]
         args_vf_capex_overview["real estate cost"] = inputs["site area"] * \
             inputs["land cost"] if result["vf_input_land_status"]["is buy"] else 0
-        args_vf_capex_overview["building renovation cost"] = result["vf_roof"]["cover cost"]
+        args_vf_capex_overview["building renovation cost"] = advanced_inputs['building_renovations_cost'] if 'building_renovations_cost' in advanced_inputs else result["vf_roof"]["cover cost"]
         args_vf_capex_overview["amount harvested per week"] = result["vf_crop"]["total yield"] / 52
         args_vf_capex_overview["electricity cost"] = inputs["electricity cost"]
         args_vf_capex_overview["ppfd"] = result["vf_crop_characteristics"]["max optimal avg ppfd"]
