@@ -115,6 +115,11 @@ class Vf_Deliverables:
                         "type": "choice",
                         "description": "Selection for grow system type",
                         "default": 1
+                    },
+                    "grow_cost_per_area": {
+                        "description": "advanced option: equipment cost per area (sf)",
+                        "type": "decimal",
+                        "default": -1
                     }
                 }
             },
@@ -361,6 +366,10 @@ class Vf_Deliverables:
                                 "type": "decimal"
                             },
                             "even price" : {
+                                "digits": 2,
+                                "type": "decimal"
+                            },
+                            "grow_cost_per_area" : {
                                 "digits": 2,
                                 "type": "decimal"
                             }
@@ -828,6 +837,10 @@ class Vf_Deliverables:
             result,
             "annual summary",
             result["financials_main"]["annual summary"])
+        # add grow cost per area
+        for i, c in enumerate(result["annual summary"][0]["crop yield"]):
+            result["annual summary"][0]["crop yield"][i]["grow_cost_per_area"] = result["vf_grow"]["crops"][i]["cost per area"]
+
         set_if_unset(
             result,
             "cash flow",

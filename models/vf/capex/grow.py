@@ -46,6 +46,11 @@ class Vf_Grow:
                         "type": "choice",
                         "description": "Selection for grow system type",
                         "default": 1
+                    },
+                    "grow_cost_per_area": {
+                        "description": "advanced option: equipment cost per area (sf)",
+                        "type": "decimal",
+                        "default": -1
                     }
                 }
             },
@@ -190,7 +195,7 @@ class Vf_Grow:
                     'bedspace': int(
                         inputs['bedspace']), 'description': description})
             result['sql_runtime'] += timeit.default_timer() - s_start
-            cost_per_area = cost_row['cost']
+            cost_per_area = cost_row['cost'] if row['grow_cost_per_area'] == -1 else row['grow_cost_per_area']
             cost = cost_per_area * inputs['bedspace'] * fraction
             depreciation = cost / inputs["depreciation duration"]
             crop_result.append({
