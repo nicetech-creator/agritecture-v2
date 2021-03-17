@@ -64,7 +64,7 @@ def fetch_all(query, query_args=None, dbname=DEFAULT_DB_NAME):
             __connect(f'/cloudsql/{CONNECTION_NAME}', dbname)
         except OperationalError:
             # If production settings fail, use local development ones
-            __connect('localhost', dbname)
+            __connect('35.243.135.22', dbname)
 
     with pg_pool.getconn() as conn:
         try:
@@ -102,7 +102,7 @@ def fetch_one(query, query_args=None, dbname=DEFAULT_DB_NAME):
             __connect(f'/cloudsql/{CONNECTION_NAME}', dbname)
         except OperationalError:
             # If production settings fail, use local development ones
-            __connect('localhost', dbname)
+            __connect('35.243.135.22', dbname)
 
     with pg_pool.getconn() as conn:
         try:

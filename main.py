@@ -2,6 +2,10 @@ import simplejson as json
 import importlib
 from collections import namedtuple
 
+from flask import Flask
+from flask import render_template, redirect, request, url_for, flash
+app = Flask(__name__)
+
 model_to_class = {}
 Module = namedtuple('Module', 'module class_name')
 
@@ -240,3 +244,10 @@ def query_model(request):
         raise ValueError("Unknown command: " + cmd)
     else:
         raise ValueError("Unspecified parameter: cmd")
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+   return query_model(request)
+
+if __name__ == '__main__':
+   app.run()
